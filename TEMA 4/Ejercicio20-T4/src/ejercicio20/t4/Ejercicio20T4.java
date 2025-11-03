@@ -34,8 +34,6 @@ public class Ejercicio20T4 {
 
         // Mostrar nota final
         System.out.println("NOTA DEL EXAMEN: " + nota);
-
-        sc.close();
     }
 
     // Método para la primera pregunta
