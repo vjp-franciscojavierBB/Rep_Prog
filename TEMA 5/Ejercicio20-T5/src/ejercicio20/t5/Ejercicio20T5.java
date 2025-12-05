@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
@@ -59,7 +59,7 @@ public class Ejercicio20T5 {
                     if (nuevaCuenta != null) {
                         System.out.print("Introduzca la cantidad a ingresar: ");
                         float cantidad = entrada.nextFloat();
-// Llamamos al método ingresar del objeto miCuenta
+// Llamamos al método ingresar del objeto nuevaCuenta
                         nuevaCuenta.ingresar(cantidad);
                         System.out.println("Se han ingresado " + cantidad + " Saldo actual: " + nuevaCuenta.getSaldo());
                     } else {
@@ -98,8 +98,8 @@ public class Ejercicio20T5 {
                     break;
                 default:
 // Para cualquier otra opción mostramos un mensaje de error
-                    System.out.println("Opción no válida elija otra opcion");
-                    break;
+                    System.out.println("Opcion no valida elija otra opcion");
+                  
             }
 // Imprimimos una línea en blanco para separar las iteraciones del menú
             System.out.println();

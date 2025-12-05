@@ -9,18 +9,22 @@ package ejercicio20.t5;
  * @author Jav1e7
  */
 public class CuentaClave extends cuenta {
+
     private String clave;
-    public CuentaClave(){
+
+    public CuentaClave() {
         super();
-        clave="";
-        
+        clave = "";
+
     }
-    public CuentaClave(float saldo , String clave ){
+
+    public CuentaClave(float saldo, String clave) {
         super(saldo);
         this.clave = clave;
     }
 //getters,setters de clave
-@Override
+
+    @Override
     public void extraer(float c) {
         // Sólo permite la extracción si hay saldo suficiente
         if (getSaldo() >= c) {
