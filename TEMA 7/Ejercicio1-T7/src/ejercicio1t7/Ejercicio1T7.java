@@ -33,9 +33,10 @@ public class Ejercicio1T7 {
 
     // Recorre el array y muestra solo los números pares
     public static void mostrarPares(int[] arr) {
-        System.out.print("Numeros pares: ");
-        boolean hayPar = false;
-        for (int n : arr) {
+        System.out.print("Numeros pares:  ");
+        
+        for (int n : arr) {        boolean hayPar = false;
+
             if (n % 2 == 0) {
                 System.out.println(n + " ");
                 hayPar = true;
