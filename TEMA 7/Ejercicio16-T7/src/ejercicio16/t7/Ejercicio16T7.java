@@ -134,7 +134,7 @@ public class Ejercicio16T7 {
             int suspensos = 0;
             for (int j = 0; j < notas[i].length; j++) {
                 if (notas[i][j] < 5) {
-                    suspensos++;
+                    suspensos++; 
                 }
             }
             if (suspensos > maxSuspensos) {
@@ -160,6 +160,7 @@ public class Ejercicio16T7 {
             }
         }
         int media = minSuma / notas.length;
-        return asignaturas[indiceDificil] + " (media: " + media + ")";
+        return asignaturas[indiceDificil] + " (media: " + media + ")";      
+        
     }
-}
+}       
