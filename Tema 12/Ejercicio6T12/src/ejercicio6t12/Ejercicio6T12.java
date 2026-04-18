@@ -1,5 +1,8 @@
-package ejercicio6.t12;
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package ejercicio6t12;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -7,25 +10,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
-
+/**
+ *
+ * @author javie
+ */
 public class Ejercicio6T12 {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String fileName = null;
-        int option;
+        String nombreFichero = "";
+        int opcion;
 
         do {
-            showMenu();
-            option = readInt(scanner, "Elige una opcion: ");
+            mostrarMenu();
+            opcion = leerEntero(scanner, "Elige una opcion: ");
 
-            switch (option) {
+            switch (opcion) {
                 case 1:
-                    fileName = askFileName(scanner);
-                    dumpEvenNumbersToFile(fileName);
+                    nombreFichero = pedirNombreFichero(scanner);
+                    volcarParesEnFichero(nombreFichero);
                     break;
                 case 2:
-                    showFileContent(fileName);
+                    mostrarContenidoFichero(nombreFichero);
                     break;
                 case 3:
                     System.out.println("Saliendo del programa...");
@@ -33,60 +39,71 @@ public class Ejercicio6T12 {
                 default:
                     System.out.println("Opcion no valida. Intentalo de nuevo.");
             }
-        } while (option != 3);
+        } while (opcion != 3);
 
         scanner.close();
     }
 
-    private static void showMenu() {
+    private static void mostrarMenu() {
         System.out.println("\n--- MENU EJERCICIO 6 ---");
         System.out.println("1. Volcar los 100 primeros pares a un fichero");
         System.out.println("2. Mostrar por pantalla el contenido del fichero");
         System.out.println("3. Salir");
     }
 
-    private static String askFileName(Scanner scanner) {
+    private static String pedirNombreFichero(Scanner scanner) {
         while (true) {
             System.out.print("Introduce el nombre del fichero de texto: ");
-            String fileName = scanner.nextLine().trim();
+            String nombre = scanner.nextLine();
 
-            if (fileName.isEmpty()) {
+            if (nombre.length() == 0) {
                 System.out.println("El nombre no puede estar vacio.");
-                continue;
+            } else {
+                if (!nombre.toLowerCase().endsWith(".txt")) {
+                    nombre = nombre + ".txt";
+                }
+                return nombre;
             }
-
-            if (!fileName.toLowerCase().endsWith(".txt")) {
-                fileName += ".txt";
-            }
-
-            return fileName;
         }
     }
 
-    private static void dumpEvenNumbersToFile(String fileName) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
-            for (int i = 1; i <= 100; i++) {
-                writer.println(i * 2);
+    private static int[] crearArrayPares() {
+        int[] pares = new int[100];
+
+        for (int i = 0; i < pares.length; i++) {
+            pares[i] = (i + 1) * 2;
+        }
+
+        return pares;
+    }
+
+    private static void volcarParesEnFichero(String ficheroDestino) {
+        int[] arrayPares = crearArrayPares();
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(ficheroDestino))) {
+            for (int i = 0; i < arrayPares.length; i++) {
+                writer.println(arrayPares[i]);
             }
-            System.out.println("Volcado realizado correctamente en " + fileName + ".");
+            System.out.println("Volcado realizado correctamente en " + ficheroDestino + ".");
         } catch (IOException e) {
             System.out.println("Error al escribir en el fichero: " + e.getMessage());
         }
     }
 
-    private static void showFileContent(String fileName) {
-        if (fileName == null) {
+    private static void mostrarContenidoFichero(String ficheroAVisualizar) {
+        if (ficheroAVisualizar.length() == 0) {
             System.out.println("Primero debes crear el fichero con la opcion 1.");
             return;
         }
 
-        File file = new File(fileName);
+        File file = new File(ficheroAVisualizar);
         if (!file.exists()) {
-            System.out.println("No existe el fichero " + fileName + ".");
+            System.out.println("No existe el fichero " + ficheroAVisualizar + ".");
             return;
         }
 
-        System.out.println("\n--- CONTENIDO DE " + fileName + " ---");
+        System.out.println("\n--- CONTENIDO DE " + ficheroAVisualizar + " ---");
+
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             boolean hasContent = false;
@@ -104,16 +121,17 @@ public class Ejercicio6T12 {
         }
     }
 
-    private static int readInt(Scanner scanner, String message) {
+    private static int leerEntero(Scanner scanner, String mensaje) {
         while (true) {
-            System.out.print(message);
-            String input = scanner.nextLine().trim();
+            System.out.print(mensaje);
+            String entrada = scanner.nextLine();
 
             try {
-                return Integer.parseInt(input);
+                return Integer.parseInt(entrada);
             } catch (NumberFormatException e) {
                 System.out.println("Debes introducir un numero valido.");
             }
         }
     }
 }
+
