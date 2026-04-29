@@ -2,16 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package ejercicio5.t12;
+package ejercicio6.t12;
 import java.io.*;
 import java.util.Scanner;
+
 /**
  *
  * @author javie
  */
-public class Ejercicio5T12 {
-
-
+public class Ejercicio6T12 {
 
     static Scanner sc = new Scanner(System.in);
 
@@ -20,9 +19,9 @@ public class Ejercicio5T12 {
         int opcion;
 
         do {
-            System.out.println("\n--- AGENDA ---");
-            System.out.println("1. Añadir contacto");
-            System.out.println("2. Mostrar agenda");
+            System.out.println("\n--- NUMEROS PARES ---");
+            System.out.println("1. Crear fichero con 100 pares");
+            System.out.println("2. Mostrar fichero");
             System.out.println("3. Salir");
             System.out.print("Elige opcion: ");
 
@@ -31,10 +30,10 @@ public class Ejercicio5T12 {
 
             switch (opcion) {
                 case 1:
-                    añadirContacto();
+                    crearFichero();
                     break;
                 case 2:
-                    mostrarAgenda();
+                    mostrarFichero();
                     break;
                 case 3:
                     System.out.println("Saliendo...");
@@ -46,30 +45,28 @@ public class Ejercicio5T12 {
         } while (opcion != 3);
     }
 
-    public static void añadirContacto() {
-        try (PrintWriter pw = new PrintWriter(new FileWriter("agenda.txt", true))) {
+    public static void crearFichero() {
+        System.out.print("Nombre del fichero: ");
+        String nombre = sc.nextLine();
 
-            System.out.print("Nombre: ");
-            String nombre = sc.nextLine();
+        try (PrintWriter pw = new PrintWriter(new FileWriter(nombre))) {
 
-            System.out.print("Edad: ");
-            int edad = sc.nextInt();
-            sc.nextLine();
+            for (int i = 1; i <= 100; i++) {
+                pw.println(i * 2);
+            }
 
-            System.out.print("Telefono: ");
-            String telefono = sc.nextLine();
-
-            pw.println(nombre + "," + edad + "," + telefono);
-
-            System.out.println("Contacto guardado.");
+            System.out.println("Fichero creado.");
 
         } catch (IOException e) {
-            System.out.println("Error al escribir en el fichero.");
+            System.out.println("Error al crear el fichero.");
         }
     }
 
-    public static void mostrarAgenda() {
-        try (BufferedReader br = new BufferedReader(new FileReader("agenda.txt"))) {
+    public static void mostrarFichero() {
+        System.out.print("Nombre del fichero: ");
+        String nombre = sc.nextLine();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(nombre))) {
 
             String linea;
             while ((linea = br.readLine()) != null) {
